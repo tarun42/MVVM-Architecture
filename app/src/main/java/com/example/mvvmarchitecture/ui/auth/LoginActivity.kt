@@ -2,13 +2,17 @@ package com.example.mvvmarchitecture.ui.auth
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.mvvmarchitecture.R
 import com.example.mvvmarchitecture.databinding.ActivityLoginBinding
+import com.example.mvvmarchitecture.util.hide
+import com.example.mvvmarchitecture.util.show
 import com.example.mvvmarchitecture.util.toast
+import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity(),AuthListener {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,13 +28,18 @@ class LoginActivity : AppCompatActivity(),AuthListener {
 
     override fun onstarted() {
         toast("Login Strated")
+        progress_bar.show()
     }
 
-    override fun onsuccess() {
-        toast("Signup Strated")
+    override fun onsuccess(loginresponse: LiveData<String>) {
+        progress_bar.hide()
+        loginresponse.observe(this, Observer {
+            toast(it)
+        })
     }
 
     override fun onfaliure(message: String) {
+        progress_bar.hide()
         toast(message)
     }
 }
