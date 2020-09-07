@@ -1,5 +1,6 @@
 package com.example.mvvmarchitecture.data.network
 
+import com.example.mvvmarchitecture.data.network.Responses.AuthResponse
 import com.google.android.material.shape.ShapeAppearanceModel.builder
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -13,10 +14,10 @@ import retrofit2.http.POST
 interface MyApi {
     @FormUrlEncoded
     @POST("login")
-    fun userlogin(
+    suspend fun userlogin(
         @Field("email") email : String,
         @Field("Password") password :String
-    ) : Call<ResponseBody>
+    ) : Response<AuthResponse>
 
     companion object{
         operator fun invoke() : MyApi{
