@@ -12,6 +12,7 @@ import com.example.mvvmarchitecture.data.db.User
 import com.example.mvvmarchitecture.databinding.ActivityLoginBinding
 import com.example.mvvmarchitecture.util.hide
 import com.example.mvvmarchitecture.util.show
+import com.example.mvvmarchitecture.util.snackbar
 import com.example.mvvmarchitecture.util.toast
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -35,10 +36,13 @@ class LoginActivity : AppCompatActivity(),AuthListener {
     override fun onsuccess(user : User) {
         progress_bar.hide()
         toast("$(user.name) is logged in")
+    root_layout.snackbar("$(user.name) is logged in")
     }
+
 
     override fun onfaliure(message: String) {
         progress_bar.hide()
         toast(message)
+        root_layout.snackbar(message)
     }
 }

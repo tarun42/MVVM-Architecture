@@ -4,16 +4,18 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.mvvmarchitecture.data.network.MyApi
 import com.example.mvvmarchitecture.data.network.Responses.AuthResponse
+import com.example.mvvmarchitecture.data.network.SaveApiRequest
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class UserReposotory {
-    suspend fun userlogin(email:String ,password :String) : Response<AuthResponse>
+class UserReposotory : SaveApiRequest(){
+    suspend fun userlogin(email:String ,password :String) : AuthResponse
     {
 
-        return MyApi().userlogin(email,password)
+        return apiRequest { MyApi().userlogin(email,password)  }
+
 
 
 //        val loginResponse =MutableLiveData<String>()
