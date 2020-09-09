@@ -28,7 +28,6 @@ class LoginActivity : AppCompatActivity(),AuthListener,KodeinAware {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-//        override val kodein by kodein()
 
 
         setContentView(R.layout.activity_login)
