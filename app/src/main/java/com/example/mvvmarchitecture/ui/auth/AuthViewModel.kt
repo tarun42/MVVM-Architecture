@@ -6,13 +6,17 @@ import com.example.mvvmarchitecture.data.reposistries.UserReposotory
 import com.example.mvvmarchitecture.util.ApiException
 import com.example.mvvmarchitecture.util.Coroutines
 
-class AuthViewModel : ViewModel() {
+class AuthViewModel(
+    private val repository : UserReposotory
+) : ViewModel() {
     var email: String? =null
     var password: String?=null
 
     var authListener :AuthListener? = null
+    fun getLoggedInUser()=repository.getUser()
+
     fun onLoginButtonClick(view : View){
-        authListener?.onstarted()
+
         if(email.isNullOrEmpty() || password.isNullOrEmpty())
         {
             authListener?.onfaliure("Invalid Credentials")
@@ -22,10 +26,10 @@ class AuthViewModel : ViewModel() {
 
         Coroutines.main {
             try {
-                val authresponse =UserReposotory().userlogin(email!!,password!!)
-//                authListener?.onsuccess(authresponse.user!!)
+                val authresponse =repository.userlogin(email!!,password!!)
                 authresponse.user?.let {
                     authListener?.onsuccess(it)
+                    repository.saveUser(it)
                     return@main
                 }
                 authListener?.onfaliure(authresponse.message!!)

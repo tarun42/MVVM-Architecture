@@ -16,7 +16,7 @@ interface MyApi {
     @POST("login")
     suspend fun userlogin(
         @Field("email") email : String,
-        @Field("Password") password :String
+        @Field("password") password :String
     ) : Response<AuthResponse>
 
     companion object{

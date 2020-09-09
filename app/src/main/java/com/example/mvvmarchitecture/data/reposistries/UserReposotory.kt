@@ -2,6 +2,8 @@ package com.example.mvvmarchitecture.data.reposistries
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.mvvmarchitecture.data.db.AppDatabase
+import com.example.mvvmarchitecture.data.db.User
 import com.example.mvvmarchitecture.data.network.MyApi
 import com.example.mvvmarchitecture.data.network.Responses.AuthResponse
 import com.example.mvvmarchitecture.data.network.SaveApiRequest
@@ -10,11 +12,14 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class UserReposotory : SaveApiRequest(){
+class UserReposotory(
+    private val api : MyApi,
+    private val db : AppDatabase
+) : SaveApiRequest(){
     suspend fun userlogin(email:String ,password :String) : AuthResponse
     {
 
-        return apiRequest { MyApi().userlogin(email,password)  }
+        return apiRequest { api.userlogin(email,password)  }
 
 
 
@@ -41,4 +46,10 @@ class UserReposotory : SaveApiRequest(){
 //            })
 //        return loginResponse
     }
+
+    suspend fun saveUser(user : User)
+    {
+        db.getUserDao().upsert(user)
+    }
+    fun getUser() =db.getUserDao().getUser()
 }

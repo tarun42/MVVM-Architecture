@@ -24,7 +24,7 @@ abstract class SaveApiRequest {
                     message.append("\n")
                 }
             }
-            message.append("Error Code ${response.code()}")
+            message.append("Eror Code ${response.code()}")
             throw ApiException(message.toString())
         }
     }
