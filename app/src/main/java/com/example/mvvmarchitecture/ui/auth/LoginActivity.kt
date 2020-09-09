@@ -12,6 +12,7 @@ import com.example.mvvmarchitecture.R
 import com.example.mvvmarchitecture.data.db.AppDatabase
 import com.example.mvvmarchitecture.data.db.User
 import com.example.mvvmarchitecture.data.network.MyApi
+import com.example.mvvmarchitecture.data.network.NetworkConnectionInterceptor
 import com.example.mvvmarchitecture.data.reposistries.UserReposotory
 import com.example.mvvmarchitecture.databinding.ActivityLoginBinding
 import com.example.mvvmarchitecture.ui.home.HomeActivity
@@ -24,7 +25,9 @@ import kotlinx.android.synthetic.main.activity_login.*
 class LoginActivity : AppCompatActivity(),AuthListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val api =MyApi()
+
+        val networkConnectionInterceptor = NetworkConnectionInterceptor(this)
+        val api =MyApi(networkConnectionInterceptor)
         val db =AppDatabase(this)
         val repository =UserReposotory(api,db)
         val factory =AuthViewModelFactory( repository)
@@ -50,20 +53,20 @@ class LoginActivity : AppCompatActivity(),AuthListener {
     }
 
     override fun onstarted() {
-        toast("Login Strated")
+//        toast("Login Strated")
         progress_bar.show()
     }
 
     override fun onsuccess(user : User) {
         progress_bar.hide()
-        toast("$(user.name) is logged in")
+//        toast("$(user.name) is logged in")
     root_layout.snackbar("$(user.name) is logged in")
     }
 
 
     override fun onfaliure(message: String) {
         progress_bar.hide()
-        toast(message)
-//        root_layout.snackbar(message)
+//        toast(message)
+        root_layout.snackbar(message)
     }
 }
