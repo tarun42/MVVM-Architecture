@@ -1,7 +1,6 @@
 package com.example.mvvmarchitecture.ui.auth
 
-import androidx.lifecycle.LiveData
-import com.example.mvvmarchitecture.data.db.User
+import com.example.mvvmarchitecture.data.db.entity.User
 
 interface AuthListener {
     fun onstarted()

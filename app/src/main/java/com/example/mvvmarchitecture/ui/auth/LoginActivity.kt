@@ -7,14 +7,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.mvvmarchitecture.R
-import com.example.mvvmarchitecture.data.db.User
+import com.example.mvvmarchitecture.data.db.entity.User
 import com.example.mvvmarchitecture.databinding.ActivityLoginBinding
 import com.example.mvvmarchitecture.ui.home.HomeActivity
 import com.example.mvvmarchitecture.util.hide
 import com.example.mvvmarchitecture.util.show
 import com.example.mvvmarchitecture.util.snackbar
 import kotlinx.android.synthetic.main.activity_login.*
-import org.kodein.di.Kodein
 import org.kodein.di.android.kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.generic.instance

@@ -5,6 +5,8 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.example.mvvmarchitecture.data.db.entity.CURRENT_USER_ID
+import com.example.mvvmarchitecture.data.db.entity.User
 
 @Dao
 interface UserDao {
